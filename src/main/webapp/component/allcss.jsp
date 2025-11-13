@@ -6,8 +6,10 @@
     theme: {
       extend: {
         colors: {
-          brand: '#059669', // A nice emerald green
-          brandhover: '#047857',
+          brand: '#006A4E',      // SUST Forest Green (Buttons, Text)
+          brandhover: '#004d38', // Darker Green for hovers
+          accent: '#FFC107',     // SUST Yellow (Icons, Highlights)
+          dark: '#111827',       // SUST Black (Navbar, Footer)
         }
       }
     }
@@ -17,16 +19,16 @@
 <style>
     .glass-card {
         background: white;
-        border-radius: 1rem; /* rounded-xl */
-        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* shadow-xl */
-        border: 1px solid #f3f4f6;
+        border-radius: 1rem;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        border-top: 5px solid #FFC107; /* Yellow top border for all cards */
     }
     .table-header {
         background-color: #f9fafb;
         text-transform: uppercase;
         font-size: 0.75rem;
         font-weight: 700;
-        color: #4b5563;
+        color: #111827;
         letter-spacing: 0.05em;
     }
 </style>
