@@ -83,4 +83,44 @@ public class CourseDao {
         } catch (Exception e) { e.printStackTrace(); }
         return f;
     }
+    
+ // ... existing methods ...
+
+    public boolean deleteCourse(int id) {
+        boolean f = false;
+        try {
+            // STEP 1: Get the Course Name first (We need it to delete student registrations)
+            String courseName = "";
+            String sqlGet = "SELECT course_title FROM courses WHERE id=?";
+            PreparedStatement psGet = conn.prepareStatement(sqlGet);
+            psGet.setInt(1, id);
+            ResultSet rs = psGet.executeQuery();
+            if (rs.next()) {
+                courseName = rs.getString("course_title");
+            }
+
+            // STEP 2: Delete all student registrations for this course
+            if (!courseName.isEmpty()) {
+                String sqlReg = "DELETE FROM course_reg WHERE courseName=?";
+                PreparedStatement psReg = conn.prepareStatement(sqlReg);
+                psReg.setString(1, courseName);
+                psReg.executeUpdate();
+            }
+
+            // STEP 3: Delete the actual course
+            String sqlDel = "DELETE FROM courses WHERE id=?";
+            PreparedStatement psDel = conn.prepareStatement(sqlDel);
+            psDel.setInt(1, id);
+
+            int i = psDel.executeUpdate();
+            if (i == 1) {
+                f = true;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return f;
+    }
+    
 }

@@ -75,7 +75,19 @@
                                     <% } %>
                                 </td>
                                 <td class="px-5 py-4 bg-white text-center">
-                                    <a href="edit_course.jsp?id=<%=c.getId()%>" class="text-blue-600 hover:text-blue-800 font-bold text-xs">Edit / Assign</a>
+                                    <div class="flex justify-center items-center gap-3">
+                                        <a href="edit_course.jsp?id=<%=c.getId()%>" class="text-blue-600 hover:text-blue-800 font-bold text-xs flex items-center gap-1">
+                                            <i class="fa-solid fa-pen-to-square"></i> Edit
+                                        </a>
+                                        
+                                        <span class="text-gray-300">|</span>
+                                        
+                                        <a href="../deleteCourse?id=<%=c.getId()%>" 
+                                           class="text-red-500 hover:text-red-700 font-bold text-xs flex items-center gap-1"
+                                           onclick="return confirm('Warning: Deleting this course will also remove all student registrations for it. Continue?')">
+                                            <i class="fa-solid fa-trash"></i> Delete
+                                        </a>
+                                    </div>
                                 </td>
                             </tr>
                             <% } %>
