@@ -21,14 +21,18 @@ public class AdminLogin extends HttpServlet {
             String email = req.getParameter("email");
             String password = req.getParameter("password");
 
-            HttpSession session = req.getSession();
+            // 1. DESTROY OLD SESSION (The "Nuclear" Option)
+            // This ensures any ghost Teacher or Student data is 100% deleted.
+            HttpSession oldSession = req.getSession(false);
+            if (oldSession != null) {
+                oldSession.invalidate();
+            }
 
-            // Hardcoded Admin Credentials
+            // 2. Create a FRESH Session
+            HttpSession session = req.getSession(true);
+
             if ("admin@gmail.com".equals(email) && "admin".equals(password)) {
-            	session.removeAttribute("teacherObj");
-                session.removeAttribute("studentObj");
-                
-                session.setAttribute("adminObj", new Student()); // Placeholder object
+                session.setAttribute("adminObj", new Student()); // Reuse Student entity for Admin placeholder
                 resp.sendRedirect("admin/index.jsp");
             } else {
                 session.setAttribute("errorMsg", "Invalid Email or Password");

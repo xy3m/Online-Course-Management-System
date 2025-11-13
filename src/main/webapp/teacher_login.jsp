@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page isELIgnored="false"%>
+<c:remove var="studentObj" scope="session" />
+<c:remove var="adminObj" scope="session" />
 <!DOCTYPE html>
 <html>
 <head>
