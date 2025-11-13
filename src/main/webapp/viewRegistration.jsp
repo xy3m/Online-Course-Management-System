@@ -27,7 +27,7 @@
         </div>
 
         <div class="flex items-center gap-3 mb-6">
-            <i class="fa-solid fa-list-check text-3xl text-blue-600"></i>
+            <i class="fa-solid fa-list-check text-3xl text-brand"></i>
             <h2 class="text-2xl font-bold text-gray-800">My Registered Courses</h2>
         </div>
 
@@ -35,9 +35,9 @@
             <table class="min-w-full leading-normal">
                 <thead>
                     <tr>
-                        <th class="table-header px-5 py-3 border-b-2 border-gray-200 text-left">Reg No</th>
+                        <th class="table-header px-5 py-3 border-b-2 border-gray-200 text-left">Code</th>
                         <th class="table-header px-5 py-3 border-b-2 border-gray-200 text-left">Course Name</th>
-                        <th class="table-header px-5 py-3 border-b-2 border-gray-200 text-center">Status</th>
+                        <th class="table-header px-5 py-3 border-b-2 border-gray-200 text-left">Assigned Teacher</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -52,11 +52,11 @@
                     <%  } else {
                             for (courseRegistration cr : list) {
                     %>
-                    <tr class="hover:bg-gray-50 border-b border-gray-200">
-                        <td class="px-5 py-4 bg-white text-sm font-bold text-gray-700"><%=cr.getRegNO()%></td>
+                    <tr class="hover:bg-gray-50 border-b border-gray-200 transition">
+                        <td class="px-5 py-4 bg-white text-sm font-bold text-gray-700"><%=cr.getCourseCode()%></td>
                         <td class="px-5 py-4 bg-white text-sm text-gray-800"><%=cr.getCourseName()%></td>
-                        <td class="px-5 py-4 bg-white text-center">
-                            <span class="bg-green-100 text-green-800 text-xs font-bold px-3 py-1 rounded-full shadow-sm">Enrolled</span>
+                        <td class="px-5 py-4 bg-white text-sm text-gray-600">
+                            <i class="fa-solid fa-chalkboard-user mr-1 text-brand"></i> <%=cr.getTeacherName()%>
                         </td>
                     </tr>
                     <%      }

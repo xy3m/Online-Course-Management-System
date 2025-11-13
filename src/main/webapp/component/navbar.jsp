@@ -37,6 +37,7 @@
                                 </div>
                             </div>
                         </c:when>
+
                         <c:when test="${not empty teacherObj}">
                              <div class="relative ml-3">
                                 <button onclick="toggleDropdown('teacher-menu')" class="dropdown-btn flex items-center gap-2 bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-full text-sm border border-gray-600 transition">
@@ -47,6 +48,7 @@
                                 </div>
                             </div>
                         </c:when>
+
                         <c:when test="${not empty adminObj}">
                              <div class="relative ml-3">
                                 <button onclick="toggleDropdown('admin-menu')" class="dropdown-btn flex items-center gap-2 bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-full text-sm border border-gray-600 transition">
@@ -57,10 +59,11 @@
                                 </div>
                             </div>
                         </c:when>
+
                         <c:otherwise>
-                            <a href="${pageContext.request.contextPath}/student_login.jsp" class="bg-accent text-black hover:bg-yellow-400 px-5 py-2 rounded text-sm font-bold shadow-sm mr-3 transition">Student Login</a>
-                            <a href="${pageContext.request.contextPath}/teacher_login.jsp" class="text-white hover:text-accent px-3 py-2 rounded text-sm font-medium transition mr-2">Teacher</a>
-                            <a href="${pageContext.request.contextPath}/admin_login.jsp" class="text-white hover:text-accent px-3 py-2 rounded text-sm font-medium transition">Admin</a>
+                            <a href="${pageContext.request.contextPath}/student_login.jsp" class="text-white hover:text-accent px-3 py-2 rounded-md text-sm font-medium transition mr-2">Student</a>
+                            <a href="${pageContext.request.contextPath}/teacher_login.jsp" class="text-white hover:text-accent px-3 py-2 rounded-md text-sm font-medium transition mr-2">Teacher</a>
+                            <a href="${pageContext.request.contextPath}/admin_login.jsp" class="text-white hover:text-accent px-3 py-2 rounded-md text-sm font-medium transition">Admin</a>
                         </c:otherwise>
                     </c:choose>
                 </div>
@@ -76,6 +79,7 @@
 
     <div id="mobile-menu" class="hidden md:hidden bg-gray-800 border-t border-gray-700">
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+             
              <c:if test="${not empty adminObj}">
                 <a href="${pageContext.request.contextPath}/admin/teacher.jsp" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700 text-white">Teachers</a>
                 <a href="${pageContext.request.contextPath}/admin/courses.jsp" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700 text-white">Courses</a>

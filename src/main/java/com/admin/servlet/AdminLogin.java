@@ -25,6 +25,9 @@ public class AdminLogin extends HttpServlet {
 
             // Hardcoded Admin Credentials
             if ("admin@gmail.com".equals(email) && "admin".equals(password)) {
+            	session.removeAttribute("teacherObj");
+                session.removeAttribute("studentObj");
+                
                 session.setAttribute("adminObj", new Student()); // Placeholder object
                 resp.sendRedirect("admin/index.jsp");
             } else {

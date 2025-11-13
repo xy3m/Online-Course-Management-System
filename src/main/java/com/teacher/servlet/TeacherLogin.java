@@ -26,6 +26,9 @@ public class TeacherLogin extends HttpServlet {
         Teacher teacher = dao.login(email, password);
 
         if (teacher != null) {
+        	session.removeAttribute("adminObj");
+            session.removeAttribute("studentObj");
+            
             session.setAttribute("teacherObj", teacher);
             resp.sendRedirect("teacher/index.jsp");
         } else {

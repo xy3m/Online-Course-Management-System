@@ -1,17 +1,16 @@
 package com.student.servlet;
 
 import java.io.IOException;
-
-import com.dao.courseRegDAO;
-import com.db.DBConnect;
-import com.entity.courseRegistration;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.db.DBConnect;
+import com.entity.courseRegistration;
+import com.dao.courseRegDAO;
 
 @WebServlet("/course_enroll")
 public class courseRegServlet extends HttpServlet {
@@ -28,12 +27,20 @@ public class courseRegServlet extends HttpServlet {
             courseRegDAO dao = new courseRegDAO(DBConnect.getConn());
             HttpSession session = req.getSession();
 
-            if (dao.addCourse(cr)) {
-                session.setAttribute("succMsg", "Course Enrolled Successfully!");
+            // 1. CHECK: Is student already enrolled?
+            if (dao.checkDoubleEnrollment(studentID, courseName)) {
+                session.setAttribute("errorMsg", "You have already enrolled in " + courseName + "!");
                 resp.sendRedirect("studentCourseEnroll.jsp");
-            } else {
-                session.setAttribute("errorMsg", "Something wrong on server!");
-                resp.sendRedirect("studentCourseEnroll.jsp");
+            } 
+            else {
+                // 2. PROCEED: Only if check passes, add the course
+                if (dao.addCourse(cr)) {
+                    session.setAttribute("succMsg", "Course Enrolled Successfully!");
+                    resp.sendRedirect("studentCourseEnroll.jsp");
+                } else {
+                    session.setAttribute("errorMsg", "Something wrong on server!");
+                    resp.sendRedirect("studentCourseEnroll.jsp");
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

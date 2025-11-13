@@ -14,11 +14,15 @@
 </head>
 <body class="bg-gray-50">
     <%@include file="component/navbar.jsp"%>
-    <c:if test="${empty studentObj}"><c:redirect url="student_login.jsp"></c:redirect></c:if>
+    
+    <%-- Redirect if not logged in --%>
+    <c:if test="${empty studentObj}">
+        <c:redirect url="student_login.jsp"></c:redirect>
+    </c:if>
 
     <div class="container mx-auto p-6 max-w-4xl">
         <div class="mb-4">
-            <a href="index.jsp" class="inline-flex items-center text-gray-600 hover:text-brand font-medium">
+            <a href="index.jsp" class="inline-flex items-center text-gray-600 hover:text-brand font-medium transition">
                 <i class="fa-solid fa-arrow-left mr-2"></i> Back to Dashboard
             </a>
         </div>
@@ -33,11 +37,11 @@
                     </div>
 
                     <c:if test="${not empty succMsg}">
-                        <div class="bg-green-100 text-green-700 p-3 rounded mb-4 text-center border border-green-200">${succMsg}</div>
+                        <div class="bg-green-100 text-green-700 p-3 rounded mb-4 text-center border border-green-200 text-sm font-bold">${succMsg}</div>
                         <c:remove var="succMsg" scope="session" />
                     </c:if>
                     <c:if test="${not empty errorMsg}">
-                        <div class="bg-red-100 text-red-700 p-3 rounded mb-4 text-center border border-red-200">${errorMsg}</div>
+                        <div class="bg-red-100 text-red-700 p-3 rounded mb-4 text-center border border-red-200 text-sm font-bold">${errorMsg}</div>
                         <c:remove var="errorMsg" scope="session" />
                     </c:if>
                     
@@ -62,9 +66,11 @@
                                     CourseDao dao = new CourseDao(DBConnect.getConn());
                                     List<Course> list = dao.getAllCourses();
                                     for (Course c : list){
+                                        // Logic to display teacher name or 'Unassigned'
+                                        String teacherName = (c.getTeacherName() != null) ? c.getTeacherName() : "Unassigned";
                                 %>                                          
                                     <option value="<%=c.getCourseTitle()%>">
-                                        <%=c.getCourseTitle()%> (<%=c.getCourseCode()%>)
+                                        <%=c.getCourseTitle()%> (<%=c.getCourseCode()%>) &mdash; <%=teacherName%>
                                     </option>                                       
                                 <% } %>
                             </select>
