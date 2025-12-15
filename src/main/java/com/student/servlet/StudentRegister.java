@@ -14,27 +14,43 @@ import com.entity.Student;
 
 @WebServlet("/student_register")
 public class StudentRegister extends HttpServlet {
+   // @Override
+ // Inside com.student.servlet.StudentRegister.java
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             String fullName = req.getParameter("fullname");
-            String regNo = req.getParameter("regno"); // NEW INPUT
+            String regNo = req.getParameter("regno");
             String email = req.getParameter("email");
             String password = req.getParameter("password");
 
-            Student u = new Student(fullName, regNo, email, password);
+            Student student = new Student(fullName, regNo, email, password);
             StudentDao dao = new StudentDao(DBConnect.getConn());
             HttpSession session = req.getSession();
 
-            boolean f = dao.register(u);
-
-            if (f) {
-                session.setAttribute("sucMsg", "Registration Successful! Please Login.");
+            // 1. PERFORM DUPLICATE CHECK
+            if (dao.checkStudentExists(email, regNo)) {
+                // A. DUPLICATE EXISTS: Set a specific error message
+                session.setAttribute("errorMsg", "Registration failed! Email or Registration No. is already in use.");
                 resp.sendRedirect("signup.jsp");
+                
             } else {
-                session.setAttribute("errorMsg", "Something went wrong on server!");
-                resp.sendRedirect("signup.jsp");
+                // B. NO DUPLICATE: Proceed with registration
+                boolean success = dao.register(student);
+
+                if (success) {
+                    session.setAttribute("sucMsg", "Registration successful! Please log in.");
+                    resp.sendRedirect("student_login.jsp"); // Redirect to login page after success
+                } else {
+                    session.setAttribute("errorMsg", "Something went wrong on server (DB insertion failed).");
+                    resp.sendRedirect("signup.jsp");
+                }
             }
-        } catch (Exception e) { e.printStackTrace(); }
+        } catch (Exception e) { 
+            e.printStackTrace();
+            req.getSession().setAttribute("errorMsg", "An unexpected error occurred.");
+            resp.sendRedirect("signup.jsp");
+        }
     }
 }

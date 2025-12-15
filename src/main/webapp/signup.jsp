@@ -35,7 +35,7 @@
                 
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Registration No</label>
-                    <input required name="regno" type="text" placeholder="e.g. 20183310XX" class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent outline-none">
+                    <input required name="regno" type="text" placeholder="e.g. 20223310XX" class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent outline-none">
                 </div>
 
                 <div>

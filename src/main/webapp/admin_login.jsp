@@ -43,7 +43,7 @@
                     <input required name="password" type="password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent outline-none transition" placeholder="admin">
                 </div>
                 
-                <button type="submit" class="w-full bg-brand hover:bg-brandhover text-white font-bold py-3 rounded-lg shadow-lg transition duration-300">Admin Sign In</button>
+                <button type="submit" class="w-full bg-brand hover:bg-brandhover text-white font-bold py-3 rounded-lg shadow-lg transition duration-300">Sign In</button>
             </form>
         </div>
     </div>

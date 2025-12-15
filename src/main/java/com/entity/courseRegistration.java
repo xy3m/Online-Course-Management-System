@@ -39,7 +39,6 @@ public class courseRegistration {
 	public String getCourseName() { return courseName; }
 	public void setCourseName(String courseName) { this.courseName = courseName; }
 	
-	// NEW GETTERS AND SETTERS
 	public String getCourseCode() { return courseCode; }
 	public void setCourseCode(String courseCode) { this.courseCode = courseCode; }
 

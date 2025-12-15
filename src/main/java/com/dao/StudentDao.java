@@ -50,4 +50,27 @@ public class StudentDao {
         } catch (Exception e) { e.printStackTrace(); }
         return u;
     }
+
+ // Inside com.dao.StudentDao.java
+
+    public boolean checkStudentExists(String email, String regNo) {
+        boolean exists = false;
+        try {
+            // FIX: Change 'student' to 'student_dtls' (or whatever your correct table name is)
+            String sql = "SELECT * FROM student_dtls WHERE email=? OR reg_no=?"; 
+            
+            // Also ensure column names match the database (changed regNo to reg_no for standard practice)
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, email);
+            ps.setString(2, regNo); // regNo here is the Java variable
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                exists = true; 
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return exists;
+    }
 }
